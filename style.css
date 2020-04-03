@@ -82,7 +82,18 @@ li {
 	0 0 3px #333;
 	border-top: 1px solid #000;
 }
-
+.active {
+	color: #888;
+	background: #222;
+	margin: 7px 5px 3px;
+	-webkit-box-shadow: inset 0 0 25px greenyellow,
+	0 0 3px #333;
+	-moz-box-shadow: inset 0 0 25px greenyellow,
+	0 0 3px #333;
+	box-shadow: inset 0 0 25px greenyellow,
+	0 0 3px #333;
+	border-top: 1px solid #000;
+}
 .fn span {
 	display: block;
 	margin: 14px 5px 0 0;

@@ -61,7 +61,16 @@ window.onload = function onLoad() {
   };
   createKeyboard();
 };
-
+document.addEventListener('keydown', (event) => {
+    event.preventDefault();
+    let pressedKey= document.querySelector(`#${event.code}`).classList.add('active');
+  }
+);
+document.addEventListener('keyup', (event) => {
+    event.preventDefault();
+    let pressedKey= document.querySelector(`#${event.code}`).classList.remove('active');
+  }
+);
 
 /*
  changeLangClickHandler = () => {};
