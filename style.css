@@ -96,37 +96,36 @@ li {
 	width: 46px;
 }
 
-#id-1-13 {
+#Backspace {
 	width: 72px;
 }
 
-#id-2-0 {
+#Tab{
 	width: 72px;
 }
 
-#id-3-0 {
+#CapsLock {
 	width: 85px;
 }
 
-#id-3-12 {
+#Enter {
 	width: 85px;
 }
 
-#id-4-0, #id-4-11 {
+#ShiftLeft, #ShiftRight {
 	width: 112px;
 }
 
-#id-5-0, #id-5-5 {
+#ControlLeft, #ControlRight {
 	width: 56px;
 }
 
 
-#id-5-4, #id-5-2 {
+#AltLeft, #AltRight {
 	width: 67px;
 }
 
-#id-5-3 {
+#Space {
 	width: 210px;
 }
-
 
