@@ -30,7 +30,9 @@ window.onload = function onLoad() {
     return matrix[language];
   };
 
-  let currentLanguage = 'en';
+  let currentLanguage =localStorage.getItem('currentLanguage');
+   if ( currentLanguage===null){currentLanguage='en'};
+
   let arrayKeyCode = getMatrix('code');
   let arrayButtons = getMatrix(`${currentLanguage}`);
 
@@ -80,7 +82,6 @@ window.onload = function onLoad() {
     }
   };
 
-
   createViewTextarea();
   createViewKeyboard();
 
@@ -93,6 +94,7 @@ window.onload = function onLoad() {
           currentLanguage = 'ru';
         } else currentLanguage = 'en';
         changeViewKeyboard();
+        localStorage.setItem('currentLanguage', `${currentLanguage}`);
       }
 
     }
