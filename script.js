@@ -33,7 +33,9 @@ window.onload = function onLoad() {
     let arrayButtons = getMatrix('en');
     let arrayKeyCode = getMatrix('code');
 
-    let createVewKeyboard = () => {
+
+
+    let createViewKeyboard = () => {
       const keyboard = document.createElement('div');
       keyboard.setAttribute('id', 'keyboard');
       document.body.append(keyboard);
@@ -57,10 +59,19 @@ window.onload = function onLoad() {
         }
       }
     };
-    createVewKeyboard();
+    let createViewTextarea = () => {
+      const textarea = document.createElement('textarea');
+      textarea.setAttribute('name', 'textarea');
+      textarea.setAttribute('id', 'textarea');
+      document.body.append(textarea);
+    };
+
+    createViewTextarea();
+    createViewKeyboard();
   };
   createKeyboard();
 };
+
 document.addEventListener('keydown', (event) => {
     event.preventDefault();
     let pressedKey= document.querySelector(`#${event.code}`).classList.add('active');

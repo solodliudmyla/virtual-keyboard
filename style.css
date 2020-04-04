@@ -70,7 +70,7 @@ li {
 	text-shadow: 0 -1px 0 #000;
 }
 
-.key:active {
+.key:active, .active {
 	color: #888;
 	background: #222;
 	margin: 7px 5px 3px;
@@ -82,18 +82,7 @@ li {
 	0 0 3px #333;
 	border-top: 1px solid #000;
 }
-.active {
-	color: #888;
-	background: #222;
-	margin: 7px 5px 3px;
-	-webkit-box-shadow: inset 0 0 25px greenyellow,
-	0 0 3px #333;
-	-moz-box-shadow: inset 0 0 25px greenyellow,
-	0 0 3px #333;
-	box-shadow: inset 0 0 25px greenyellow,
-	0 0 3px #333;
-	border-top: 1px solid #000;
-}
+
 .fn span {
 	display: block;
 	margin: 14px 5px 0 0;
@@ -140,3 +129,10 @@ li {
 	width: 210px;
 }
 
+#textarea{
+	width: 794px;
+	height: 200px;
+	background: #d5d9dc repeat-x;
+	margin: 50px auto;
+	display: block;
+}
