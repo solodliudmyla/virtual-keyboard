@@ -136,3 +136,8 @@ li {
 	margin: 50px auto;
 	display: block;
 }
+#info{
+	height: 10px;
+	color: white;
+	font-size: large;
+}

@@ -31,11 +31,23 @@ window.onload = function onLoad() {
   };
 
   let currentLanguage =localStorage.getItem('currentLanguage');
-   if ( currentLanguage===null){currentLanguage='en'};
+   if ( currentLanguage===null){currentLanguage='en'}
 
   let arrayKeyCode = getMatrix('code');
   let arrayButtons = getMatrix(`${currentLanguage}`);
 
+  let createInformationArea=()=>{
+    const controlKeysLanguageText = document.createElement('p');
+    controlKeysLanguageText.setAttribute('id','info');
+    controlKeysLanguageText.innerHTML=`Сочетание клавиш: Ctrl + Alt <br>Клавиатура создавалась в Windows` ;
+    document.body.append(controlKeysLanguageText);
+  };
+  let createViewTextarea = () => {
+    const textarea = document.createElement('textarea');
+    textarea.setAttribute('name', 'textarea');
+    textarea.setAttribute('id', 'textarea');
+    document.body.append(textarea);
+  };
   let createViewKeyboard = () => {
 
     arrayButtons = getMatrix(`${currentLanguage}`);
@@ -65,12 +77,6 @@ window.onload = function onLoad() {
       }
     }
   };
-  let createViewTextarea = () => {
-    const textarea = document.createElement('textarea');
-    textarea.setAttribute('name', 'textarea');
-    textarea.setAttribute('id', 'textarea');
-    document.body.append(textarea);
-  };
   let changeViewKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
     let arrayButtonsRow = [].concat(...arrayButtons);
@@ -82,6 +88,7 @@ window.onload = function onLoad() {
     }
   };
 
+  createInformationArea();
   createViewTextarea();
   createViewKeyboard();
 
@@ -96,7 +103,6 @@ window.onload = function onLoad() {
         changeViewKeyboard();
         localStorage.setItem('currentLanguage', `${currentLanguage}`);
       }
-
     }
   );
   document.addEventListener('keyup', (event) => {
