@@ -48,7 +48,7 @@ window.onload = function onLoad() {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'textarea');
     textarea.setAttribute('id', 'textarea');
-    textarea.setAttribute('autofocus', 'autofocus');
+    textarea.setAttribute('autofocus', 'true');
 
     document.body.append(textarea);
   };
@@ -93,7 +93,7 @@ window.onload = function onLoad() {
     }
   };
   let changeViewTextarea = (pressedKeyValue) => {
-    let TextInsideTextarea = document.querySelector('#textarea');
+    let TextInsideTextarea = document.querySelector('textarea');
     if (pressedKeyValue === 'Backspace') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
     } else if (pressedKeyValue === 'Delete') {
@@ -101,8 +101,6 @@ window.onload = function onLoad() {
     } else {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
-
-
   };
 
   createInformationArea();
@@ -138,6 +136,19 @@ window.onload = function onLoad() {
       case ('AltRight'):
       case ('ShiftLeft'):
       case ('ShiftRight'):
+      case ('Escape'):
+      case ('F1'):
+      case ('F2'):
+      case ('F3'):
+      case ('F4'):
+      case ('F5'):
+      case ('F6'):
+      case ('F7'):
+      case ('F8'):
+      case ('F9'):
+      case ('F10'):
+      case ('F11'):
+      case ('F12'):
         break;
       default:
 
@@ -157,8 +168,6 @@ window.onload = function onLoad() {
       let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
     });
   document.addEventListener('mousedown', (event) => {
-    event.preventDefault();
-
     let mouseKeyCode=event.target.id;
     let pressedKeyValue = '';
     switch (mouseKeyCode) {
@@ -187,6 +196,20 @@ window.onload = function onLoad() {
       case (''):
       case ('MetaLeft'):
       case ('textarea'):
+      case ('keyboard'):
+      case ('Escape'):
+      case ('F1'):
+      case ('F2'):
+      case ('F3'):
+      case ('F4'):
+      case ('F5'):
+      case ('F6'):
+      case ('F7'):
+      case ('F8'):
+      case ('F9'):
+      case ('F10'):
+      case ('F11'):
+      case ('F12'):
         break;
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
