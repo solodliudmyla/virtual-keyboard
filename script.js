@@ -30,16 +30,18 @@ window.onload = function onLoad() {
     return matrix[language];
   };
 
-  let currentLanguage =localStorage.getItem('currentLanguage');
-   if ( currentLanguage===null){currentLanguage='en'}
+  let currentLanguage = localStorage.getItem('currentLanguage');
+  if (currentLanguage === null) {
+    currentLanguage = 'en';
+  }
 
   let arrayKeyCode = getMatrix('code');
   let arrayButtons = getMatrix(`${currentLanguage}`);
 
-  let createInformationArea=()=>{
+  let createInformationArea = () => {
     const controlKeysLanguageText = document.createElement('p');
-    controlKeysLanguageText.setAttribute('id','info');
-    controlKeysLanguageText.innerHTML=`Сочетание клавиш: Ctrl + Alt <br>Клавиатура создавалась в Windows` ;
+    controlKeysLanguageText.setAttribute('id', 'info');
+    controlKeysLanguageText.innerHTML = `Сочетание клавиш: Ctrl + Alt <br>Клавиатура создавалась в Windows`;
     document.body.append(controlKeysLanguageText);
   };
   let createViewTextarea = () => {
@@ -77,6 +79,7 @@ window.onload = function onLoad() {
       }
     }
   };
+
   let changeViewKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
     let arrayButtonsRow = [].concat(...arrayButtons);
@@ -87,24 +90,30 @@ window.onload = function onLoad() {
 
     }
   };
+  let changeViewTextarea = (pressedKeyValue) => {
+    let TextInsideTextarea = document.querySelector('#textarea');
+    TextInsideTextarea.value += `${pressedKeyValue}`;
+  };
 
   createInformationArea();
   createViewTextarea();
   createViewKeyboard();
 
   document.addEventListener('keydown', (event) => {
-      event.preventDefault();
-      let pressedKey = document.querySelector(`#${event.code}`).classList.add('active');
+    event.preventDefault();
+    let pressedKey = document.querySelector(`#${event.code}`).classList.add('active');
+    let pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
 
-      if (event.altKey && event.ctrlKey) {
-        if (currentLanguage === 'en') {
-          currentLanguage = 'ru';
-        } else currentLanguage = 'en';
-        changeViewKeyboard();
-        localStorage.setItem('currentLanguage', `${currentLanguage}`);
-      }
+    if (event.altKey && event.ctrlKey) {
+      if (currentLanguage === 'en') {
+        currentLanguage = 'ru';
+      } else currentLanguage = 'en';
+      changeViewKeyboard();
+      localStorage.setItem('currentLanguage', `${currentLanguage}`);
     }
-  );
+
+    changeViewTextarea(pressedKeyValue);
+  });
   document.addEventListener('keyup', (event) => {
       event.preventDefault();
       let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
