@@ -82,9 +82,9 @@ window.onload = function onLoad() {
 
   let changeViewKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
-    let arrayButtonsRow = [].concat(...arrayButtons);
+    let arrayButtonsRow = [].concat(...arrayButtons); // turn the two-dimensional array into the one-dimensional
 
-    let arrTagSpan = document.querySelectorAll('span');
+    let arrTagSpan = document.querySelectorAll('span');// get the one-dimensional array
     for (let i = 0; i < arrTagSpan.length; i++) {
       arrTagSpan[i].innerText = `${arrayButtonsRow[i]}`;
 
@@ -92,7 +92,15 @@ window.onload = function onLoad() {
   };
   let changeViewTextarea = (pressedKeyValue) => {
     let TextInsideTextarea = document.querySelector('#textarea');
-    TextInsideTextarea.value += `${pressedKeyValue}`;
+    if (pressedKeyValue === 'Backspace') {
+      TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
+    } else if (pressedKeyValue === 'Delete') {
+      TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
+    } else {
+      TextInsideTextarea.value += `${pressedKeyValue}`;
+    }
+
+
   };
 
   createInformationArea();
@@ -101,10 +109,39 @@ window.onload = function onLoad() {
 
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
-    let pressedKey = document.querySelector(`#${event.code}`).classList.add('active');
-    let pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
 
-    if (event.altKey && event.ctrlKey) {
+   document.querySelector(`#${event.code}`).classList.add('active'); // add colour and animation effect
+
+    let pressedKeyValue = '';
+    switch (event.code) {
+      case ('Tab'):
+        pressedKeyValue = '    ';
+        break;
+      case ('Space'):
+        pressedKeyValue = ' ';
+        break;
+      case ('Enter'):
+        pressedKeyValue = '\n';
+        break;
+      case ('Backspace'):
+        pressedKeyValue = 'Backspace';
+        break;
+      case ('Delete'):
+        pressedKeyValue = 'Delete';
+        break;
+      case ('CapsLock'):
+      case ('ControlLeft'):
+      case ('ControlRight'):
+      case ('AltLeft'):
+      case ('AltRight'):
+      case ('ShiftLeft'):
+      case ('ShiftRight'):
+        break;
+      default:
+
+        pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
+}
+ if (event.altKey && event.ctrlKey) {
       if (currentLanguage === 'en') {
         currentLanguage = 'ru';
       } else currentLanguage = 'en';
