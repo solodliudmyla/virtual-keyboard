@@ -48,6 +48,8 @@ window.onload = function onLoad() {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'textarea');
     textarea.setAttribute('id', 'textarea');
+    textarea.setAttribute('autofocus', 'autofocus');
+
     document.body.append(textarea);
   };
   let createViewKeyboard = () => {
@@ -156,6 +158,7 @@ window.onload = function onLoad() {
     });
   document.addEventListener('mousedown', (event) => {
     event.preventDefault();
+
     let mouseKeyCode=event.target.id;
     let pressedKeyValue = '';
     switch (mouseKeyCode) {
@@ -183,6 +186,7 @@ window.onload = function onLoad() {
       case ('ShiftRight'):
       case (''):
       case ('MetaLeft'):
+      case ('textarea'):
         break;
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;

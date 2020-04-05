@@ -141,3 +141,6 @@ li {
 	color: white;
 	font-size: large;
 }
+#textarea:focus{
+	border:2px solid blue ;
+}
