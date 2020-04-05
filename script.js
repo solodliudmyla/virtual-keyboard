@@ -148,23 +148,47 @@ window.onload = function onLoad() {
       changeViewKeyboard();
       localStorage.setItem('currentLanguage', `${currentLanguage}`);
     }
-
     changeViewTextarea(pressedKeyValue);
   });
   document.addEventListener('keyup', (event) => {
       event.preventDefault();
       let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
+    });
+  document.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+    let mouseKeyCode=event.target.id;
+    let pressedKeyValue = '';
+    switch (mouseKeyCode) {
+      case ('Tab'):
+        pressedKeyValue = '    ';
+        break;
+      case ('Space'):
+        pressedKeyValue = ' ';
+        break;
+      case ('Enter'):
+        pressedKeyValue = '\n';
+        break;
+      case ('Backspace'):
+        pressedKeyValue = 'Backspace';
+        break;
+      case ('Delete'):
+        pressedKeyValue = 'Delete';
+        break;
+      case ('CapsLock'):
+      case ('ControlLeft'):
+      case ('ControlRight'):
+      case ('AltLeft'):
+      case ('AltRight'):
+      case ('ShiftLeft'):
+      case ('ShiftRight'):
+      case (''):
+      case ('MetaLeft'):
+        break;
+      default:
+        pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
     }
-  );
+        changeViewTextarea(pressedKeyValue);
+  });
 
 
 };
-/*
- changeLangClickHandler = () => {};
- EnterClickHandler = () => {};
- TabClickHandler = () => {};
- DeleteClickHandler = () => {};
- BackspaceClickHandler = () => {};
- ArrowClickHandler = () => {};
- */
-
