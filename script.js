@@ -38,13 +38,13 @@ window.onload = function onLoad() {
   const arrayKeyCode = getMatrix('code');
   let arrayButtons = getMatrix(`${currentLanguage}`);
 
-  let createInformationArea = () => {
+  const createInformationArea = () => {
     const controlKeysLanguageText = document.createElement('p');
     controlKeysLanguageText.setAttribute('id', 'info');
     controlKeysLanguageText.innerHTML = `Клавиатура создавалась в Windows. Сочетание клавиш:  Ctrl + Alt`;
     document.body.append(controlKeysLanguageText);
   };
-  let createViewTextarea = () => {
+  const createViewTextarea = () => {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'textarea');
     textarea.setAttribute('id', 'textarea');
@@ -52,7 +52,7 @@ window.onload = function onLoad() {
 
     document.body.append(textarea);
   };
-  let createViewKeyboard = () => {
+  const createViewKeyboard = () => {
 
     arrayButtons = getMatrix(`${currentLanguage}`);
 
@@ -66,16 +66,16 @@ window.onload = function onLoad() {
       keyboard.append(keyboardRow);
 
       for (let j = 0; j < arrayButtons[i].length; j++) {
-        let tagLi = document.createElement('li');
+        const tagLi = document.createElement('li');
         keyboardRow.append(tagLi);
-        let tagA = document.createElement('a');
+        const tagA = document.createElement('a');
         tagA.setAttribute('class', 'key');
         tagA.setAttribute('id', `${arrayKeyCode[i][j]}`);
         if (i === 0) {
           tagA.setAttribute('class', 'key fn');
         }
         tagLi.append(tagA);
-        let tagSpan = document.createElement('span');
+        const tagSpan = document.createElement('span');
         tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
         tagSpan.innerHTML = arrayButtons[i][j];
         tagA.append(tagSpan);
@@ -87,18 +87,17 @@ window.onload = function onLoad() {
   createViewTextarea();
   createViewKeyboard();
 
-  let changeViewKeyboard = () => {
+  const changeViewKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
-    let arrayButtonsRow = [].concat(...arrayButtons); // turn the two-dimensional array into the one-dimensional
+    const arrayButtonsRow = [].concat(...arrayButtons); // turn the two-dimensional array into the one-dimensional
 
-    let arrTagSpan = document.querySelectorAll('span');// get the one-dimensional array
+    const arrTagSpan = document.querySelectorAll('span');// get the one-dimensional array
     for (let i = 0; i < arrTagSpan.length; i++) {
       arrTagSpan[i].innerText = `${arrayButtonsRow[i]}`;
-
     }
   };
-  let changeViewTextarea = (pressedKeyValue) => {
-    let TextInsideTextarea = document.querySelector('textarea');
+  const changeViewTextarea = (pressedKeyValue) => {
+    const TextInsideTextarea = document.querySelector('textarea');
 
     if ((pressedKeyValue === 'Backspace') && (TextInsideTextarea.selectionStart !== 0)) {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
@@ -168,11 +167,11 @@ window.onload = function onLoad() {
   });
   document.addEventListener('keyup', (event) => {
     event.preventDefault();
-    let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
+    document.querySelector(`#${event.code}`).classList.remove('active');
   });
   document.addEventListener('mousedown', (event) => {
 
-    let mouseKeyCode = event.target.id;
+    const mouseKeyCode = event.target.id;
     let pressedKeyValue = '';
 
     switch (mouseKeyCode) {
