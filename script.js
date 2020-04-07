@@ -82,6 +82,10 @@ window.onload = function onLoad() {
     }
   };
 
+  createInformationArea();
+  createViewTextarea();
+  createViewKeyboard();
+
   let changeViewKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
     let arrayButtonsRow = [].concat(...arrayButtons); // turn the two-dimensional array into the one-dimensional
@@ -94,7 +98,9 @@ window.onload = function onLoad() {
   };
   let changeViewTextarea = (pressedKeyValue) => {
     let TextInsideTextarea = document.querySelector('textarea');
-    if (pressedKeyValue === 'Backspace' && TextInsideTextarea.selectionStart !== 0) {
+
+
+    if ((pressedKeyValue === 'Backspace' )&&(TextInsideTextarea.selectionStart !== 0)) {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
     } else if (pressedKeyValue === 'Delete') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
@@ -102,10 +108,6 @@ window.onload = function onLoad() {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
   };
-
-  createInformationArea();
-  createViewTextarea();
-  createViewKeyboard();
 
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
@@ -168,9 +170,11 @@ window.onload = function onLoad() {
     let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
   });
   document.addEventListener('mousedown', (event) => {
-    let mouseTarget=event.target;
-    let mouseKeyCode = mouseTarget.id;
+    let mouseKeyCode = event.target.id;
     let pressedKeyValue = '';
+    //in case if button 'delete' have id=''
+    if ((mouseKeyCode==='')&&(event.target.innerText==="DELETE")){changeViewTextarea('Delete');}
+
     switch (mouseKeyCode) {
       case ('Tab'):
         pressedKeyValue = '    ';
@@ -214,6 +218,7 @@ window.onload = function onLoad() {
         break;
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
+
     }
     changeViewTextarea(pressedKeyValue);
   });
