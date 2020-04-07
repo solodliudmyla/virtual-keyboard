@@ -40,8 +40,9 @@ window.onload = function onLoad() {
 
   let createInformationArea = () => {
     const controlKeysLanguageText = document.createElement('p');
+    const tagBr = document.createElement('br');
     controlKeysLanguageText.setAttribute('id', 'info');
-    controlKeysLanguageText.innerHTML = `Сочетание клавиш: Ctrl + Alt <br>Клавиатура создавалась в Windows`;
+    controlKeysLanguageText.innerHTML = `Клавиатура создавалась в Windows. Сочетание клавиш:  Ctrl + Alt`;
     document.body.append(controlKeysLanguageText);
   };
   let createViewTextarea = () => {
@@ -215,6 +216,7 @@ window.onload = function onLoad() {
       case ('F10'):
       case ('F11'):
       case ('F12'):
+      case ('info'):
         break;
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
