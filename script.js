@@ -94,13 +94,15 @@ window.onload = function onLoad() {
   };
   let changeViewTextarea = (pressedKeyValue) => {
     let TextInsideTextarea = document.querySelector('textarea');
-    if (pressedKeyValue === 'Backspace') {
+    if (pressedKeyValue === 'Backspace' && TextInsideTextarea.selectionStart !== 0) {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
     } else if (pressedKeyValue === 'Delete') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
+      TextInsideTextarea.focus();
     } else {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
+    TextInsideTextarea.focus();
   };
 
   createInformationArea();
@@ -110,7 +112,7 @@ window.onload = function onLoad() {
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
 
-   document.querySelector(`#${event.code}`).classList.add('active'); // add colour and animation effect
+    document.querySelector(`#${event.code}`).classList.add('active'); // add colour and animation effect
 
     let pressedKeyValue = '';
     switch (event.code) {
@@ -153,8 +155,8 @@ window.onload = function onLoad() {
       default:
 
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
-}
- if (event.altKey && event.ctrlKey) {
+    }
+    if (event.altKey && event.ctrlKey) {
       if (currentLanguage === 'en') {
         currentLanguage = 'ru';
       } else currentLanguage = 'en';
@@ -164,11 +166,11 @@ window.onload = function onLoad() {
     changeViewTextarea(pressedKeyValue);
   });
   document.addEventListener('keyup', (event) => {
-      event.preventDefault();
-      let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
-    });
+    event.preventDefault();
+    let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
+  });
   document.addEventListener('mousedown', (event) => {
-    let mouseKeyCode=event.target.id;
+    let mouseKeyCode = event.target.id;
     let pressedKeyValue = '';
     switch (mouseKeyCode) {
       case ('Tab'):
@@ -214,7 +216,7 @@ window.onload = function onLoad() {
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
     }
-        changeViewTextarea(pressedKeyValue);
+    changeViewTextarea(pressedKeyValue);
   });
 
 
