@@ -76,6 +76,7 @@ window.onload = function onLoad() {
         }
         tagLi.append(tagA);
         let tagSpan = document.createElement('span');
+        tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
         tagSpan.innerHTML = arrayButtons[i][j];
         tagA.append(tagSpan);
       }
@@ -99,11 +100,11 @@ window.onload = function onLoad() {
   let changeViewTextarea = (pressedKeyValue) => {
     let TextInsideTextarea = document.querySelector('textarea');
 
-
-    if ((pressedKeyValue === 'Backspace' )&&(TextInsideTextarea.selectionStart !== 0)) {
+    if ((pressedKeyValue === 'Backspace') && (TextInsideTextarea.selectionStart !== 0)) {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
     } else if (pressedKeyValue === 'Delete') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
+    } else if ((pressedKeyValue === 'Backspace') && (TextInsideTextarea.selectionStart === 0)) {
     } else {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
@@ -170,10 +171,9 @@ window.onload = function onLoad() {
     let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
   });
   document.addEventListener('mousedown', (event) => {
+
     let mouseKeyCode = event.target.id;
     let pressedKeyValue = '';
-    //in case if button 'delete' have id=''
-    if ((mouseKeyCode==='')&&(event.target.innerText==="DELETE")){changeViewTextarea('Delete');}
 
     switch (mouseKeyCode) {
       case ('Tab'):
