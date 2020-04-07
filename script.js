@@ -98,11 +98,9 @@ window.onload = function onLoad() {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart - 1, TextInsideTextarea.selectionEnd);
     } else if (pressedKeyValue === 'Delete') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
-      TextInsideTextarea.focus();
     } else {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
-    TextInsideTextarea.focus();
   };
 
   createInformationArea();
@@ -219,5 +217,7 @@ window.onload = function onLoad() {
     changeViewTextarea(pressedKeyValue);
   });
 
-
+  document.addEventListener('click', () => {
+    document.getElementById('textarea').focus();
+  });
 };
