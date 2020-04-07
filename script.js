@@ -35,7 +35,7 @@ window.onload = function onLoad() {
     currentLanguage = 'en';
   }
 
-  let arrayKeyCode = getMatrix('code');
+  const arrayKeyCode = getMatrix('code');
   let arrayButtons = getMatrix(`${currentLanguage}`);
 
   let createInformationArea = () => {
@@ -168,7 +168,8 @@ window.onload = function onLoad() {
     let pressedKey = document.querySelector(`#${event.code}`).classList.remove('active');
   });
   document.addEventListener('mousedown', (event) => {
-    let mouseKeyCode = event.target.id;
+    let mouseTarget=event.target;
+    let mouseKeyCode = mouseTarget.id;
     let pressedKeyValue = '';
     switch (mouseKeyCode) {
       case ('Tab'):
