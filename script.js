@@ -40,7 +40,6 @@ window.onload = function onLoad() {
 
   let createInformationArea = () => {
     const controlKeysLanguageText = document.createElement('p');
-    const tagBr = document.createElement('br');
     controlKeysLanguageText.setAttribute('id', 'info');
     controlKeysLanguageText.innerHTML = `Клавиатура создавалась в Windows. Сочетание клавиш:  Ctrl + Alt`;
     document.body.append(controlKeysLanguageText);
