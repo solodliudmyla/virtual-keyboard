@@ -1,3 +1,3 @@
 # virtual-keyboard
 
- https://solodliudmyla.github.io/virtual-keyboard/
+https://solodliudmyla-virtual-keyboard.netlify.app/
