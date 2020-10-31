@@ -1,5 +1,4 @@
 window.onload = function onLoad() {
-
   const getMatrix = (language) => {
     const matrix = {
       code: [
@@ -11,20 +10,20 @@ window.onload = function onLoad() {
         ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight']
       ],
       en: [
-        ['Esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Delete'],
-        ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'],
-        ['tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
-        ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
-        ['shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift'],
-        ['Ctrl', 'Win', 'Alt', 'space', 'Alt', 'Ctrl', '◄', '▲', '▼', '►']
+        ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
+        ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '<-'],
+        ['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+        ['CAPSLOCK', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'ENTER'],
+        ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'],
+        ['CTRL', 'WIN', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
       ],
       ru: [
-        ['Esc', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'Delete'],
-        ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'],
-        ['tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
-        ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
-        ['shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'shift'],
-        ['Ctrl', 'Win', 'Alt', 'space', 'Alt', 'Ctrl', '◄', '▲', '▼', '►']
+        ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
+        ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '<-'],
+        ['TAB', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
+        ['CAPSLOCK', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'ENTER'],
+        ['SHIFT', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'SHIFT'],
+        ['CTRL', 'WIN', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
       ]
     };
     return matrix[language];
@@ -36,14 +35,10 @@ window.onload = function onLoad() {
   }
 
   const arrayKeyCode = getMatrix('code');
-  let arrayButtons = getMatrix(`${currentLanguage}`);
+  let arrayButtons = [];
+  let capsLock = false;
+  const sumBtnInEveryRow = [14, 14, 14, 13, 12, 10];
 
-  const createInformationArea = () => {
-    const controlKeysLanguageText = document.createElement('p');
-    controlKeysLanguageText.setAttribute('id', 'info');
-    controlKeysLanguageText.innerHTML = `Клавиатура создавалась в Windows. Сочетание клавиш:  Ctrl + Alt`;
-    document.body.append(controlKeysLanguageText);
-  };
   const createViewTextarea = () => {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'textarea');
@@ -52,20 +47,17 @@ window.onload = function onLoad() {
 
     document.body.append(textarea);
   };
+
   const createViewKeyboard = () => {
-
-    arrayButtons = getMatrix(`${currentLanguage}`);
-
     const keyboard = document.createElement('div');
     keyboard.setAttribute('id', 'keyboard');
     document.body.append(keyboard);
-
     for (let i = 0; i < 6; i++) {
       const keyboardRow = document.createElement('ul');
       keyboardRow.setAttribute('class', 'cf');
       keyboard.append(keyboardRow);
 
-      for (let j = 0; j < arrayButtons[i].length; j++) {
+      for (let j = 0; j < sumBtnInEveryRow[i]; j++) {
         const tagLi = document.createElement('li');
         keyboardRow.append(tagLi);
         const tagA = document.createElement('a');
@@ -77,25 +69,38 @@ window.onload = function onLoad() {
         tagLi.append(tagA);
         const tagSpan = document.createElement('span');
         tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
-        tagSpan.innerHTML = arrayButtons[i][j];
         tagA.append(tagSpan);
       }
     }
   };
 
-  createInformationArea();
-  createViewTextarea();
-  createViewKeyboard();
+  /*  const addLettersToKeyboardView = () => {
+   if (capsLock) {
+   tagSpan.innerHTML = arrayButtons[i][j].toUpperCase();
+   } else {
+   tagSpan.innerHTML = arrayButtons[i][j];
+   }
+   tagA.append(tagSpan);
+   }; */
 
-  const changeViewKeyboard = () => {
+  const paintLettersOnKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
-    const arrayButtonsRow = [].concat(...arrayButtons); // turn the two-dimensional array into the one-dimensional
 
+    // turn the two-dimensional array into the one-dimensional
+    const arrayButtonsRow = [].concat(...arrayButtons);
     const arrTagSpan = document.querySelectorAll('span');// get the one-dimensional array
     for (let i = 0; i < arrTagSpan.length; i++) {
-      arrTagSpan[i].innerText = `${arrayButtonsRow[i]}`;
+      if (capsLock) {
+        arrTagSpan[i].innerText = `${arrayButtonsRow[i].toUpperCase()}`;
+      } else {
+        arrTagSpan[i].innerText = `${arrayButtonsRow[i]}`;
+      }
     }
   };
+  createViewTextarea();
+  createViewKeyboard();
+  paintLettersOnKeyboard();
+
   const changeViewTextarea = (pressedKeyValue) => {
     const TextInsideTextarea = document.querySelector('textarea');
 
@@ -104,6 +109,7 @@ window.onload = function onLoad() {
     } else if (pressedKeyValue === 'Delete') {
       TextInsideTextarea.setRangeText('', TextInsideTextarea.selectionStart, TextInsideTextarea.selectionEnd + 1);
     } else if ((pressedKeyValue === 'Backspace') && (TextInsideTextarea.selectionStart === 0)) {
+
     } else {
       TextInsideTextarea.value += `${pressedKeyValue}`;
     }
@@ -112,7 +118,9 @@ window.onload = function onLoad() {
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
 
-    document.querySelector(`#${event.code}`).classList.add('active'); // add colour and animation effect
+    document.querySelector(`#${event.code}`)
+      .classList
+      .add('active'); // add colour and animation effect
 
     let pressedKeyValue = '';
     switch (event.code) {
@@ -132,6 +140,9 @@ window.onload = function onLoad() {
         pressedKeyValue = 'Delete';
         break;
       case ('CapsLock'):
+        capsLock = (!capsLock);
+        paintLettersOnKeyboard();
+        break;
       case ('ControlLeft'):
       case ('ControlRight'):
       case ('AltLeft'):
@@ -156,21 +167,26 @@ window.onload = function onLoad() {
 
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
     }
-    if (event.altKey && event.ctrlKey) {
-      if (currentLanguage === 'en') {
-        currentLanguage = 'ru';
-      } else currentLanguage = 'en';
-      changeViewKeyboard();
-      localStorage.setItem('currentLanguage', `${currentLanguage}`);
-    }
+    /* if (event.altKey && event.ctrlKey) {
+     if (currentLanguage === 'en') {
+     currentLanguage = 'ru';
+     } else {
+     currentLanguage = 'en';
+     }
+     changeViewKeyboard();
+     localStorage.setItem('currentLanguage', `${currentLanguage}`);
+     } */
     changeViewTextarea(pressedKeyValue);
   });
+
   document.addEventListener('keyup', (event) => {
     event.preventDefault();
-    document.querySelector(`#${event.code}`).classList.remove('active');
+    document.querySelector(`#${event.code}`)
+      .classList
+      .remove('active');
   });
-  document.addEventListener('mousedown', (event) => {
 
+  document.addEventListener('mousedown', (event) => {
     const mouseKeyCode = event.target.id;
     let pressedKeyValue = '';
 
@@ -191,6 +207,9 @@ window.onload = function onLoad() {
         pressedKeyValue = 'Delete';
         break;
       case ('CapsLock'):
+        capsLock = (!capsLock);
+        paintLettersOnKeyboard();
+        break;
       case ('ControlLeft'):
       case ('ControlRight'):
       case ('AltLeft'):
@@ -218,12 +237,12 @@ window.onload = function onLoad() {
         break;
       default:
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
-
     }
     changeViewTextarea(pressedKeyValue);
   });
 
   document.addEventListener('click', () => {
-    document.getElementById('textarea').focus();
+    document.getElementById('textarea')
+      .focus();
   });
 };

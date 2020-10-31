@@ -135,6 +135,7 @@ li {
 	background: #d5d9dc repeat-x;
 	margin: 50px auto;
 	display: block;
+	border: 2px;
 }
 #info{
 	height: 10px;
