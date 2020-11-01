@@ -74,15 +74,6 @@ window.onload = function onLoad() {
     }
   };
 
-  /*  const addLettersToKeyboardView = () => {
-   if (capsLock) {
-   tagSpan.innerHTML = arrayButtons[i][j].toUpperCase();
-   } else {
-   tagSpan.innerHTML = arrayButtons[i][j];
-   }
-   tagA.append(tagSpan);
-   }; */
-
   const paintLettersOnKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
 
@@ -101,6 +92,9 @@ window.onload = function onLoad() {
   createViewKeyboard();
   paintLettersOnKeyboard();
 
+  document.querySelector('#CapsLock')
+    .classList
+    .remove('active');
   const changeViewTextarea = (pressedKeyValue) => {
     const TextInsideTextarea = document.querySelector('textarea');
 
@@ -140,7 +134,17 @@ window.onload = function onLoad() {
         pressedKeyValue = 'Delete';
         break;
       case ('CapsLock'):
-        capsLock = (!capsLock);
+        if (capsLock) {
+          capsLock = false;
+          document.querySelector('#CapsLock')
+            .classList
+            .remove('active');
+        } else {
+          capsLock = true;
+          document.querySelector('#CapsLock')
+            .classList
+            .add('active');
+        }
         paintLettersOnKeyboard();
         break;
       case ('ControlLeft'):
@@ -207,7 +211,17 @@ window.onload = function onLoad() {
         pressedKeyValue = 'Delete';
         break;
       case ('CapsLock'):
-        capsLock = (!capsLock);
+        if (capsLock) {
+          capsLock = false;
+          document.querySelector('#CapsLock')
+            .classList
+            .remove('active');
+        } else {
+          capsLock = true;
+          document.querySelector('#CapsLock')
+            .classList
+            .add('active');
+        }
         paintLettersOnKeyboard();
         break;
       case ('ControlLeft'):
