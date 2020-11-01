@@ -1,5 +1,10 @@
+*{
+	margin: 0;
+	padding: 0;
+
+}
 body {
-	background: #333;
+	background: darkslategrey;
 }
 
 #keyboard {
@@ -131,17 +136,90 @@ li {
 
 #textarea{
 	width: 794px;
-	height: 200px;
+	height: 150px;
 	background: #d5d9dc repeat-x;
 	margin: 50px auto;
 	display: block;
 	border: 2px;
+	outline:none;
+	box-shadow: inset 0 0 8px #bbb, 0 1px 0 #aaa, 0 4px 0 #bbb, 0 10px 30px #111;
+	border-radius: 10px;
+	padding: 3px;
 }
 #info{
 	height: 10px;
 	color: white;
 	font-size: large;
 }
-#textarea:focus{
-	border:2px solid blue ;
+#textarea:active, :hover, :focus {
+	outline: 0;
+	outline-offset: 0;
+}
+/*------------------------------------------*/
+
+.checkbox {
+	position: fixed;
+	top: 1%;
+	left: 1%;
+	width: 100px;
+	height: 50px;
+	border-radius: 25px;
+	background:#d5d9dc repeat-x ;
+	box-shadow: inset 0 0 8px #bbb, 0 1px 0 #aaa, 0 4px 0 #bbb, 0 10px 30px #111;
+
+}
+
+.inner {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	bottom: 10px;
+	background: linear-gradient(0deg, #a5a5a5, #717171);
+	border-radius: 20px;
+	box-shadow: inset 0 0 15px rgba(0,0,0,.5);
+}
+
+.toggle {
+	position: absolute;
+	top: -3px;
+	left: -3px;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: linear-gradient(0deg, #ccc, #e4e4e4);
+	box-shadow: 0 4px 6px rgba(0,0,0,.2);
+	box-sizing: border-box;
+	border-top: 0.04em solid #ececec;
+	border-bottom: 0.04em solid #ececec;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.checkbox .inner.active .toggle {
+	left: 47px;
+}
+
+.inner.active {
+	background: linear-gradient(0deg, #00d22d, #158a00);
+}
+
+.toggle::before {
+	content: 'OFF';
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	right: 4px;
+	bottom: 4px;
+	background: linear-gradient(0deg, #e4e4e4, #ccc);
+	border-radius: 50%;
+	text-align: center;
+	font-size: 10px;
+	line-height: 28px;
+	color: black;
+}
+
+.inner.active .toggle::before {
+	content: 'ON';
+	color: #00d22d;
 }

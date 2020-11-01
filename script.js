@@ -7,7 +7,7 @@ window.onload = function onLoad() {
         ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
         ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
         ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight'],
-        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight']
+        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'],
       ],
       en: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -15,7 +15,7 @@ window.onload = function onLoad() {
         ['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
         ['CAPSLOCK', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'ENTER'],
         ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
       ],
       ru: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -23,8 +23,8 @@ window.onload = function onLoad() {
         ['TAB', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
         ['CAPSLOCK', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'ENTER'],
         ['SHIFT', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
-      ]
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
+      ],
     };
     return matrix[language];
   };
@@ -79,7 +79,7 @@ window.onload = function onLoad() {
 
     // turn the two-dimensional array into the one-dimensional
     const arrayButtonsRow = [].concat(...arrayButtons);
-    const arrTagSpan = document.querySelectorAll('span');// get the one-dimensional array
+    const arrTagSpan = document.querySelectorAll('span');
     for (let i = 0; i < arrTagSpan.length; i++) {
       if (capsLock) {
         arrTagSpan[i].innerText = `${arrayButtonsRow[i].toUpperCase()}`;
@@ -88,6 +88,7 @@ window.onload = function onLoad() {
       }
     }
   };
+
   createViewTextarea();
   createViewKeyboard();
   paintLettersOnKeyboard();
@@ -171,15 +172,6 @@ window.onload = function onLoad() {
 
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
     }
-    /* if (event.altKey && event.ctrlKey) {
-     if (currentLanguage === 'en') {
-     currentLanguage = 'ru';
-     } else {
-     currentLanguage = 'en';
-     }
-     changeViewKeyboard();
-     localStorage.setItem('currentLanguage', `${currentLanguage}`);
-     } */
     changeViewTextarea(pressedKeyValue);
   });
 
@@ -267,4 +259,14 @@ window.onload = function onLoad() {
     document.getElementById('textarea')
       .focus();
   });
+
+  const keyboard = document.querySelector('#keyboard');
 };
+
+$(document).ready(function(){
+  $('.toggle').click(function(){
+    $('.inner').toggleClass('active')
+
+  });
+
+});
