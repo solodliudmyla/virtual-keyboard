@@ -7,7 +7,7 @@ window.onload = function onLoad() {
         ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
         ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
         ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight'],
-        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'],
+        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight']
       ],
       en: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -15,7 +15,7 @@ window.onload = function onLoad() {
         ['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
         ['CAPSLOCK', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'ENTER'],
         ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
       ],
       ru: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -23,8 +23,8 @@ window.onload = function onLoad() {
         ['TAB', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
         ['CAPSLOCK', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'ENTER'],
         ['SHIFT', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
-      ],
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
+      ]
     };
     return matrix[language];
   };
@@ -261,12 +261,20 @@ window.onload = function onLoad() {
   });
 
   const keyboard = document.querySelector('#keyboard');
-};
 
-$(document).ready(function(){
-  $('.toggle').click(function(){
-    $('.inner').toggleClass('active')
+  const checkbox = document.querySelector('#checkbox');
 
+  checkbox.addEventListener('click', () => {
+    if (checkbox.checked) {
+      keyboard.style.display = 'none';
+    } else {
+      keyboard.style.display = 'block';
+    }
   });
 
-});
+
+
+
+
+
+};
