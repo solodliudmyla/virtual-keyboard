@@ -174,7 +174,7 @@ window.onload = function onLoad() {
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
     }
     changeViewTextarea(pressedKeyValue);
-    console.log(pressedKeyValue);
+
     const audio = document.querySelector('audio');
     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
     audio.play();
@@ -259,6 +259,9 @@ window.onload = function onLoad() {
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
     }
     changeViewTextarea(pressedKeyValue);
+    const audio = document.querySelector('audio');
+    audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
+    audio.play();
   });
 
   document.addEventListener('click', () => {
