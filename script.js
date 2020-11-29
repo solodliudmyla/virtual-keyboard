@@ -7,7 +7,7 @@ window.onload = function onLoad() {
         ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
         ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
         ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight'],
-        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'],
+        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight']
       ],
       en: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -15,7 +15,7 @@ window.onload = function onLoad() {
         ['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
         ['CAPSLOCK', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'ENTER'],
         ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
       ],
       ru: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -23,16 +23,39 @@ window.onload = function onLoad() {
         ['TAB', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
         ['CAPSLOCK', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'ENTER'],
         ['SHIFT', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
-      ],
+        ['CTRL', 'EN/RU', 'ALT', 'SPACE', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
+      ]
     };
     return matrix[language];
   };
+
+  const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
+    'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
+  const sumRuLetters = 33;
 
   let currentLanguage = localStorage.getItem('currentLanguage');
   if (currentLanguage === null) {
     currentLanguage = 'en';
   }
+
+  const letterToFall = ruLetters[Math.floor(Math.random() * sumRuLetters)];
+  const divLetterToFall = document.createElement('div');
+  divLetterToFall.setAttribute('class', 'fall-letter');
+  document.body.append(divLetterToFall);
+  divLetterToFall.append(letterToFall);
+  const letterToFallWithStyle = document.querySelector('.fall-letter');
+  const fallingLetter = (letter, speed) => {
+    let letterTop = Number(letter.style.top);
+    for (let i = 0; i < 90; i++) {
+      setTimeout(() => {
+        letterTop += 1;
+        letter.style.top = `${letterTop}vh`;
+        letter.style.opacity = (90 - i) / 100;
+      }, speed);
+    }
+  };
+
+  fallingLetter(letterToFallWithStyle, 500);
 
   const arrayKeyCode = getMatrix('code');
   let arrayButtons = [];
@@ -88,7 +111,6 @@ window.onload = function onLoad() {
       }
     }
   };
- // <audio class="KeyU" src="/src/audio/en/a.mp3">
 
   createViewTextarea();
   createViewKeyboard();
@@ -179,7 +201,6 @@ window.onload = function onLoad() {
     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
     audio.play();
   });
-
 
   document.addEventListener('keyup', (event) => {
     event.preventDefault();

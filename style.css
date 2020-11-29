@@ -1,8 +1,9 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 
 }
+
 body {
 	background: darkslategrey;
 }
@@ -106,7 +107,7 @@ li {
 	width: 72px;
 }
 
-#Tab{
+#Tab {
 	width: 72px;
 }
 
@@ -135,23 +136,25 @@ li {
 	width: 210px;
 }
 
-#textarea{
+#textarea {
 	width: 794px;
 	height: 150px;
 	background: #d5d9dc repeat-x;
 	margin: 50px auto;
 	display: block;
 	border: 2px;
-	outline:none;
+	outline: none;
 	box-shadow: inset 0 0 8px #bbb, 0 1px 0 #aaa, 0 4px 0 #bbb, 0 10px 30px #111;
 	border-radius: 10px;
 	padding: 3px;
 }
-#info{
+
+#info {
 	height: 10px;
 	color: white;
 	font-size: large;
 }
+
 #textarea:active, :hover, :focus {
 	outline: 0;
 	outline-offset: 0;
@@ -166,7 +169,7 @@ li {
 }
 
 .switch input {
-	display:none;
+	display: none;
 }
 
 .slider {
@@ -205,4 +208,29 @@ input:checked + .slider:before {
 
 .slider.round:before {
 	border-radius: 50%;
+}
+
+.fall-letter {
+	z-index: 100;
+	position: absolute;
+	display: block;
+	font-family: "Arial Black", "Arial", sans-serif;
+	font-size:5vh ;
+	width: 5vh;
+	height: 5vh;
+	/*transform: translateY(-50px);*/
+	transition: all 3s ease-in;
+	color: gold;
+  left: 50%;
+	top:-6vh;
+}
+
+/*.fall {
+	transform: translateY(500px);
+}*/
+#textarea{
+	display: none;
+}
+video{
+	height: 6vh;
 }
