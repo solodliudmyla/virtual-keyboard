@@ -28,34 +28,42 @@ window.onload = function onLoad() {
     };
     return matrix[language];
   };
-
-  const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э',
-    'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
-  const sumRuLetters = 33;
-
   let currentLanguage = localStorage.getItem('currentLanguage');
   if (currentLanguage === null) {
     currentLanguage = 'en';
   }
 
-  const letterToFall = ruLetters[Math.floor(Math.random() * sumRuLetters)];
+
+  const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
+  const sumRuLetters = 33;
+
   const divLetterToFall = document.createElement('div');
   divLetterToFall.setAttribute('class', 'fall-letter');
+  divLetterToFall.style.position = 'absolute';
   document.body.append(divLetterToFall);
-  divLetterToFall.append(letterToFall);
-  const letterToFallWithStyle = document.querySelector('.fall-letter');
+
+
   const fallingLetter = (letter, speed) => {
-    let letterTop = Number(letter.style.top);
+    let letterTop = parseInt(letter.style.top);
     for (let i = 0; i < 90; i++) {
       setTimeout(() => {
         letterTop += 1;
         letter.style.top = `${letterTop}vh`;
         letter.style.opacity = (90 - i) / 100;
-      }, speed);
+      }, speed * i);
     }
   };
 
-  fallingLetter(letterToFallWithStyle, 500);
+  let letterToFallWithStyle;
+  function generateNewLetterWithInterval() {
+    setInterval(() => {
+      divLetterToFall.innerText = ruLetters[Math.floor(Math.random() * sumRuLetters)];
+      letterToFallWithStyle = document.querySelector('.fall-letter');
+      letterToFallWithStyle.style.top = '-6vh';
+      letterToFallWithStyle.style.opacity = '1';
+      fallingLetter(letterToFallWithStyle, 50);
+    }, 4500);
+  }
 
   const arrayKeyCode = getMatrix('code');
   let arrayButtons = [];
@@ -67,7 +75,6 @@ window.onload = function onLoad() {
     textarea.setAttribute('name', 'textarea');
     textarea.setAttribute('id', 'textarea');
     textarea.setAttribute('autofocus', 'true');
-
     document.body.append(textarea);
   };
 
@@ -133,6 +140,21 @@ window.onload = function onLoad() {
     }
   };
 
+  const isLettersMatch = (pressedKeyValue) => {
+    const letterOnScreen = letterToFallWithStyle.innerText;
+    const audio = document.querySelector('.audio-letter-matched');
+    if (letterOnScreen === pressedKeyValue) {
+      letterToFallWithStyle.innerText='';
+      audio.src = 'src/audio/matched-letter.mp3';
+      audio.play();
+      // generateNewLetterWithInterval();
+    } else {
+      audio.src = 'src/audio/err-matched-letter.mp3';
+      audio.play();
+    }
+  };
+  generateNewLetterWithInterval();
+
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
 
@@ -194,10 +216,10 @@ window.onload = function onLoad() {
       default:
 
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
+        isLettersMatch(pressedKeyValue);
     }
     changeViewTextarea(pressedKeyValue);
-
-    const audio = document.querySelector('audio');
+    const audio = document.querySelector('.audio-key-pushed');
     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
     audio.play();
   });
@@ -300,5 +322,6 @@ window.onload = function onLoad() {
       keyboard.style.display = 'block';
     }
   });
-
 };
+
+

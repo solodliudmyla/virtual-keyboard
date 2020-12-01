@@ -218,16 +218,11 @@ input:checked + .slider:before {
 	font-size:5vh ;
 	width: 5vh;
 	height: 5vh;
-	/*transform: translateY(-50px);*/
-	transition: all 3s ease-in;
+	/*transition: all 3s ease-in;*/
 	color: gold;
   left: 50%;
-	top:-6vh;
 }
 
-/*.fall {
-	transform: translateY(500px);
-}*/
 #textarea{
 	display: none;
 }
