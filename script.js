@@ -219,9 +219,9 @@ window.onload = function onLoad() {
         isLettersMatch(pressedKeyValue);
     }
     changeViewTextarea(pressedKeyValue);
-    const audio = document.querySelector('.audio-key-pushed');
+  /*  const audio = document.querySelector('.audio-key-pushed');
     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
-    audio.play();
+    audio.play();*/
   });
 
   document.addEventListener('keyup', (event) => {
@@ -302,9 +302,9 @@ window.onload = function onLoad() {
         pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
     }
     changeViewTextarea(pressedKeyValue);
-    const audio = document.querySelector('audio');
+  /* const audio = document.querySelector('audio');
     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
-    audio.play();
+    audio.play();*/
   });
 
   document.addEventListener('click', () => {
