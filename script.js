@@ -33,7 +33,6 @@ window.onload = function onLoad() {
     currentLanguage = 'en';
   }
 
-
   const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
   const enLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
   const sumRuLetters = 33;
@@ -43,7 +42,6 @@ window.onload = function onLoad() {
   divLetterToFall.setAttribute('class', 'fall-letter');
   divLetterToFall.style.position = 'absolute';
   document.body.append(divLetterToFall);
-
 
   const fallingLetter = (letter, speed) => {
     let letterTop = parseInt(letter.style.top);
@@ -57,6 +55,7 @@ window.onload = function onLoad() {
   };
 
   let letterToFallWithStyle;
+
   function generateNewLetterWithInterval() {
     setInterval(() => {
       // divLetterToFall.innerText = ruLetters[Math.floor(Math.random() * sumRuLetters)];
@@ -95,13 +94,13 @@ window.onload = function onLoad() {
         keyboardRow.append(tagLi);
         const tagA = document.createElement('a');
         tagA.setAttribute('class', 'key');
-       tagA.setAttribute('id', `${arrayKeyCode[i][j]}`);
+        tagA.setAttribute('id', `${arrayKeyCode[i][j]}`);
         if (i === 0) {
           tagA.setAttribute('class', 'key fn');
         }
         tagLi.append(tagA);
         const tagSpan = document.createElement('span');
-       // tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
+        // tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
         tagSpan.setAttribute('class', 'spanKey');
         tagA.append(tagSpan);
       }
@@ -110,7 +109,6 @@ window.onload = function onLoad() {
 
   const paintLettersOnKeyboard = () => {
     arrayButtons = getMatrix(`${currentLanguage}`);
-
     // turn the two-dimensional array into the one-dimensional
     const arrayButtonsRow = [].concat(...arrayButtons);
     const arrTagSpan = document.querySelectorAll('.spanKey');
@@ -148,7 +146,7 @@ window.onload = function onLoad() {
     const letterOnScreen = letterToFallWithStyle.innerText;
     const audio = document.querySelector('.audio-letter-matched');
     if (letterOnScreen === pressedKeyValue) {
-      letterToFallWithStyle.innerText='';
+      letterToFallWithStyle.innerText = '';
       audio.src = 'src/audio/matched-letter.mp3';
       audio.play();
       // generateNewLetterWithInterval();
@@ -223,9 +221,9 @@ window.onload = function onLoad() {
         isLettersMatch(pressedKeyValue);
     }
     changeViewTextarea(pressedKeyValue);
-  /*  const audio = document.querySelector('.audio-key-pushed');
-    audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
-    audio.play();*/
+    /*  const audio = document.querySelector('.audio-key-pushed');
+     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
+     audio.play();*/
   });
 
   document.addEventListener('keyup', (event) => {
@@ -235,97 +233,19 @@ window.onload = function onLoad() {
       .remove('active');
   });
 
-  document.addEventListener('mousedown', (event) => {
-    const mouseKeyCode = event.target.id;
-    let pressedKeyValue = '';
-
-    switch (mouseKeyCode) {
-      case ('Tab'):
-        pressedKeyValue = '    ';
-        break;
-      case ('Space'):
-        pressedKeyValue = ' ';
-        break;
-      case ('Enter'):
-        pressedKeyValue = '\n';
-        break;
-      case ('Backspace'):
-        pressedKeyValue = 'Backspace';
-        break;
-      case ('Delete'):
-        pressedKeyValue = 'Delete';
-        break;
-      case ('CapsLock'):
-        if (capsLock) {
-          capsLock = false;
-          document.querySelector('#CapsLock')
-            .classList
-            .remove('active');
-        } else {
-          capsLock = true;
-          document.querySelector('#CapsLock')
-            .classList
-            .add('active');
-        }
-        paintLettersOnKeyboard();
-        break;
-      case ('MetaLeft'):
-        if (currentLanguage === 'en') {
-          currentLanguage = 'ru';
-        } else {
-          currentLanguage = 'en';
-        }
-        paintLettersOnKeyboard();
-        localStorage.setItem('currentLanguage', `${currentLanguage}`);
-        break;
-      case ('ControlLeft'):
-      case ('ControlRight'):
-      case ('AltLeft'):
-      case ('AltRight'):
-      case ('ShiftLeft'):
-      case ('ShiftRight'):
-      case (''):
-      case ('textarea'):
-      case ('keyboard'):
-      case ('Escape'):
-      case ('F1'):
-      case ('F2'):
-      case ('F3'):
-      case ('F4'):
-      case ('F5'):
-      case ('F6'):
-      case ('F7'):
-      case ('F8'):
-      case ('F9'):
-      case ('F10'):
-      case ('F11'):
-      case ('F12'):
-      case ('info'):
-        break;
-      default:
-        pressedKeyValue = document.querySelector(`#${mouseKeyCode}`).childNodes[0].textContent;
-    }
-    changeViewTextarea(pressedKeyValue);
-  /* const audio = document.querySelector('audio');
-    audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
-    audio.play();*/
-  });
-
   document.addEventListener('click', () => {
     document.getElementById('textarea')
       .focus();
   });
 
   const keyboard = document.querySelector('#keyboard');
-  const checkbox = document.querySelector('#checkbox');
+  const keyboardViewCheckbox = document.querySelector('#keyboardViewCheckbox');
 
-  checkbox.addEventListener('click', () => {
-    if (checkbox.checked) {
-      keyboard.style.display = 'none';
-    } else {
+  keyboardViewCheckbox.addEventListener('click', () => {
+    if (keyboardViewCheckbox.checked) {
       keyboard.style.display = 'block';
+    } else {
+      keyboard.style.display = 'none';
     }
   });
 };
-
-
