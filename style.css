@@ -6,6 +6,16 @@
 
 body {
 	background: darkslategrey;
+	font-size: 17px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height: 1.6;
+	color: #1e3948;
+}
+:root {
+	--white: #e8e9ed;
+	--gray: #434257;
+	--blue: #18172c;
+	--green: #00d084;
 }
 
 #keyboard {
@@ -90,7 +100,7 @@ li {
 	border-top: 1px solid #000;
 }
 
-.fn span {
+.fn .spanKey{
 	display: block;
 	margin: 14px 5px 0 0;
 	text-align: right;
@@ -209,7 +219,7 @@ input:checked + .slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
-
+/*----------------------------------*/
 .fall-letter {
 	z-index: 100;
 	position: absolute;
@@ -229,3 +239,116 @@ input:checked + .slider:before {
 video{
 	height: 6vh;
 }
+
+/* tips */
+
+.drop-btn {
+	background-color: #d5d9dc;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .drop-btn {
+	background-color: #4CAF50;
+
+}
+
+.dropdown-line{
+	display: flex;
+	justify-content: space-between;
+	margin: 20px;
+}
+
+label {
+	cursor: pointer;
+}
+
+[type="checkbox"] {
+	position: absolute;
+	left: -9999px;
+}
+
+.switches label {
+	display: flex;
+	margin-left: 20px;
+}
+
+.switches span:last-child {
+	position: relative;
+	width: 50px;
+	height: 26px;
+	border-radius: 15px;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+	background: var(--gray);
+	transition: all 0.3s;
+}
+
+.switches span:last-child::before,
+.switches span:last-child::after {
+	content: "";
+	position: absolute;
+}
+
+.switches span:last-child::before {
+	left: 1px;
+	top: 1px;
+	width: 24px;
+	height: 24px;
+	background: var(--white);
+	border-radius: 50%;
+	z-index: 1;
+	transition: transform 0.3s;
+}
+
+.switches span:last-child::after {
+	top: 50%;
+	right: 8px;
+	width: 12px;
+	height: 12px;
+	transform: translateY(-50%);
+	background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/uncheck-switcher.svg);
+	background-size: 12px 12px;
+}
+
+.switches [type="checkbox"]:checked + label span:last-child {
+	background: var(--green);
+}
+
+.switches [type="checkbox"]:checked + label span:last-child::before {
+	transform: translateX(24px);
+}
+
+.switches [type="checkbox"]:checked + label span:last-child::after {
+	width: 14px;
+	height: 14px;
+	/*right: auto;*/
+	left: 8px;
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
+	background-size: 14px 14px;
+}
+
+
+

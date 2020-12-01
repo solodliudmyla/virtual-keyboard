@@ -92,13 +92,14 @@ window.onload = function onLoad() {
         keyboardRow.append(tagLi);
         const tagA = document.createElement('a');
         tagA.setAttribute('class', 'key');
-        tagA.setAttribute('id', `${arrayKeyCode[i][j]}`);
+       tagA.setAttribute('id', `${arrayKeyCode[i][j]}`);
         if (i === 0) {
           tagA.setAttribute('class', 'key fn');
         }
         tagLi.append(tagA);
         const tagSpan = document.createElement('span');
-        tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
+       // tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
+        tagSpan.setAttribute('class', 'spanKey');
         tagA.append(tagSpan);
       }
     }
@@ -109,7 +110,7 @@ window.onload = function onLoad() {
 
     // turn the two-dimensional array into the one-dimensional
     const arrayButtonsRow = [].concat(...arrayButtons);
-    const arrTagSpan = document.querySelectorAll('span');
+    const arrTagSpan = document.querySelectorAll('.spanKey');
     for (let i = 0; i < arrTagSpan.length; i++) {
       if (capsLock) {
         arrTagSpan[i].innerText = `${arrayButtonsRow[i].toUpperCase()}`;
