@@ -35,7 +35,9 @@ window.onload = function onLoad() {
 
 
   const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
+  const enLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
   const sumRuLetters = 33;
+  const sumEnLetters = 26;
 
   const divLetterToFall = document.createElement('div');
   divLetterToFall.setAttribute('class', 'fall-letter');
@@ -57,7 +59,8 @@ window.onload = function onLoad() {
   let letterToFallWithStyle;
   function generateNewLetterWithInterval() {
     setInterval(() => {
-      divLetterToFall.innerText = ruLetters[Math.floor(Math.random() * sumRuLetters)];
+      // divLetterToFall.innerText = ruLetters[Math.floor(Math.random() * sumRuLetters)];
+      divLetterToFall.innerText = enLetters[Math.floor(Math.random() * sumEnLetters)];
       letterToFallWithStyle = document.querySelector('.fall-letter');
       letterToFallWithStyle.style.top = '-6vh';
       letterToFallWithStyle.style.opacity = '1';
