@@ -10,6 +10,7 @@ body {
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	line-height: 1.6;
 	color: #1e3948;
+	padding: 2px;
 }
 :root {
 	--white: #e8e9ed;
@@ -58,9 +59,8 @@ li {
 	float: left;
 }
 
-
 .key {
-	display: block;
+	display: flex;
 	color: #aaa;
 	font: bold 9pt arial;
 	text-decoration: none;
@@ -85,7 +85,10 @@ li {
 	0 2px 0 #222,
 	0 2px 3px #333;
 	text-shadow: 0 -1px 0 #000;
+  justify-content:center ;
+	align-items: center;
 }
+
 
 .key:active, .active {
 	color: #888;
@@ -248,6 +251,11 @@ video{
 	font-size: 16px;
 	border: none;
 	cursor: pointer;
+	border-radius: 1px;
+	box-shadow: inset 0 0 4px #bbb,
+	0 1px 0 #aaa,
+	0 1px 0 #bbb,
+	0 2px 10px #111;
 }
 
 .dropdown {
@@ -262,24 +270,27 @@ video{
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
-
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+	background-color: #f1f1f1
+}
 
 .dropdown:hover .dropdown-content {
 	display: block;
 }
 
 .dropdown:hover .drop-btn {
-	background-color: #4CAF50;
-
+	background-color: #888888;
 }
 
-.dropdown-line{
+.switches{
 	display: flex;
 	justify-content: space-between;
-	margin: 20px;
+	padding: 20px;
+}
+.switches:hover{
+	background-color: #cccccc;
 }
 
 label {
@@ -344,7 +355,6 @@ label {
 .switches [type="checkbox"]:checked + label span:last-child::after {
 	width: 14px;
 	height: 14px;
-	/*right: auto;*/
 	left: 8px;
 	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
 	background-size: 14px 14px;
