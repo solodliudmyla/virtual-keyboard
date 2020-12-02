@@ -221,6 +221,7 @@ window.onload = function onLoad() {
     /*  const audio = document.querySelector('.audio-key-pushed');
      audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
      audio.play();*/
+    keySound(pressedKeyValue);
   });
 
   document.addEventListener('keyup', (event) => {
@@ -245,17 +246,27 @@ window.onload = function onLoad() {
       keyboard.style.display = 'none';
     }
   });
+
+  const winLoseSound = document.querySelector('#winLoseSound');
+
+  function playSoundForWin() {
+    if (winLoseSound.checked) {
+      new Audio('src/audio/matched-letter.mp3').play();
+    }
+  }
+
+  function playSoundForLose() {
+    if (winLoseSound.checked) {
+      new Audio('src/audio/err-matched-letter.mp3').play();
+    }
+  }
+
+  const keyPressedSound = document.querySelector('#keyPressedSound');
+
+  function keySound(pressedKeyValue) {
+    if (keyPressedSound.checked) {
+      new Audio(`src/audio/${currentLanguage}/${pressedKeyValue}.mp3`).play();
+    }
+  }
+
 };
-
-const winLoseSound = document.querySelector('#winLoseSound');
-
-function playSoundForWin() {
-  if (winLoseSound.checked) {
-    new Audio('src/audio/matched-letter.mp3').play();
-  }
-}
-function playSoundForLose() {
-  if (winLoseSound.checked) {
-    new Audio('src/audio/err-matched-letter.mp3').play();
-  }
-}
