@@ -5,7 +5,7 @@
 }
 
 body {
-	background: darkslategrey;
+	background:#18172C;
 	font-size: 17px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	line-height: 1.6;
@@ -20,7 +20,12 @@ body {
 }
 
 #keyboard {
-	margin: 50px auto;
+	position: fixed;
+	bottom: 0;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
 	width: 794px;
 	height: 315px;
 	background: #d5d9dc repeat-x;
@@ -358,6 +363,5 @@ label {
 	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
 	background-size: 14px 14px;
 }
-
 
 

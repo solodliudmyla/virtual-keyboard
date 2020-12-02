@@ -100,7 +100,6 @@ window.onload = function onLoad() {
         }
         tagLi.append(tagA);
         const tagSpan = document.createElement('span');
-        // tagSpan.setAttribute('id', `${arrayKeyCode[i][j]}`);
         tagSpan.setAttribute('class', 'spanKey');
         tagA.append(tagSpan);
       }
@@ -218,9 +217,6 @@ window.onload = function onLoad() {
         isLettersMatch(pressedKeyValue);
     }
     changeViewTextarea(pressedKeyValue);
-    /*  const audio = document.querySelector('.audio-key-pushed');
-     audio.src = `src/audio/${currentLanguage}/${pressedKeyValue}.mp3`;
-     audio.play();*/
     keySound(pressedKeyValue);
   });
 
@@ -238,7 +234,6 @@ window.onload = function onLoad() {
 
   const keyboard = document.querySelector('#keyboard');
   const keyboardViewCheckbox = document.querySelector('#keyboardViewCheckbox');
-
   keyboardViewCheckbox.addEventListener('click', () => {
     if (keyboardViewCheckbox.checked) {
       keyboard.style.display = 'block';
@@ -248,13 +243,11 @@ window.onload = function onLoad() {
   });
 
   const winLoseSound = document.querySelector('#winLoseSound');
-
   function playSoundForWin() {
     if (winLoseSound.checked) {
       new Audio('src/audio/matched-letter.mp3').play();
     }
   }
-
   function playSoundForLose() {
     if (winLoseSound.checked) {
       new Audio('src/audio/err-matched-letter.mp3').play();
@@ -262,7 +255,6 @@ window.onload = function onLoad() {
   }
 
   const keyPressedSound = document.querySelector('#keyPressedSound');
-
   function keySound(pressedKeyValue) {
     if (keyPressedSound.checked) {
       new Audio(`src/audio/${currentLanguage}/${pressedKeyValue}.mp3`).play();
