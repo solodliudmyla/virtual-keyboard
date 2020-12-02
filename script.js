@@ -144,15 +144,12 @@ window.onload = function onLoad() {
 
   const isLettersMatch = (pressedKeyValue) => {
     const letterOnScreen = letterToFallWithStyle.innerText;
-    const audio = document.querySelector('.audio-letter-matched');
     if (letterOnScreen === pressedKeyValue) {
       letterToFallWithStyle.innerText = '';
-      audio.src = 'src/audio/matched-letter.mp3';
-      audio.play();
+      playSoundForWin();
       // generateNewLetterWithInterval();
     } else {
-      audio.src = 'src/audio/err-matched-letter.mp3';
-      audio.play();
+      playSoundForLose();
     }
   };
   generateNewLetterWithInterval();
@@ -249,3 +246,16 @@ window.onload = function onLoad() {
     }
   });
 };
+
+const winLoseSound = document.querySelector('#winLoseSound');
+
+function playSoundForWin() {
+  if (winLoseSound.checked) {
+    new Audio('src/audio/matched-letter.mp3').play();
+  }
+}
+function playSoundForLose() {
+  if (winLoseSound.checked) {
+    new Audio('src/audio/err-matched-letter.mp3').play();
+  }
+}
