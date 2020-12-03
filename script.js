@@ -50,6 +50,8 @@ window.onload = function onLoad() {
   let timerIdArray = [];
 
   const fallingLetter = () => {
+    timerIdArray.forEach(clearTimeout);
+    timerIdArray = [];
     let letterTop = -6;
     for (let i = 0; i < 90; i ++) {
       timerIdArray.push(setTimeout(() => {
@@ -58,6 +60,7 @@ window.onload = function onLoad() {
         letterToFallWithStyle.style.opacity = (90 - i) / 100;
       }, fallingLetterSpeed * i));
     }
+
   };
 
   function generateNewLetterWithInterval() {
@@ -73,8 +76,6 @@ window.onload = function onLoad() {
     const letterOnScreen = letterToFallWithStyle.innerText;
     if (letterOnScreen === pressedKeyValue) {
       playSoundForWin();
-      timerIdArray.forEach(clearTimeout);
-      timerIdArray = [];
       generateNewLetterWithInterval();
     } else {
       playSoundForLose();
