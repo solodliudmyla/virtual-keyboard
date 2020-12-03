@@ -47,22 +47,17 @@ window.onload = function onLoad() {
   const letterToFallWithStyle = document.querySelector('.fall-letter');
   letterToFallWithStyle.style.top = '-6vh';
   letterToFallWithStyle.style.opacity = '1';
-  const timerIdArray = [];
+  let timerIdArray = [];
 
   const fallingLetter = () => {
     let letterTop = -6;
     for (let i = 0; i < 90; i ++) {
-      const timerId = setTimeout(() => {
-        timerIdArray.push(timerId);
+      timerIdArray.push(setTimeout(() => {
         letterTop += 1;
         letterToFallWithStyle.style.top = `${letterTop}vh`;
         letterToFallWithStyle.style.opacity = (90 - i) / 100;
-      }, fallingLetterSpeed * i);
+      }, fallingLetterSpeed * i));
     }
-    for (let i = 0; i <= timerIdArray.length; i ++) {
-      clearTimeout(timerIdArray[i]);
-    }
-    timerIdArray.length = 0;
   };
 
   function generateNewLetterWithInterval() {
@@ -78,10 +73,8 @@ window.onload = function onLoad() {
     const letterOnScreen = letterToFallWithStyle.innerText;
     if (letterOnScreen === pressedKeyValue) {
       playSoundForWin();
-      for (let i = 0; i <= timerIdArray.length; i ++) {
-        clearTimeout(timerIdArray[i]);
-      }
-      timerIdArray.length = 0;
+      timerIdArray.forEach(clearTimeout);
+      timerIdArray = [];
       generateNewLetterWithInterval();
     } else {
       playSoundForLose();
