@@ -7,7 +7,7 @@ window.onload = function onLoad() {
         ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash'],
         ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
         ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ShiftRight'],
-        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'],
+        ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight']
       ],
       en: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -15,7 +15,7 @@ window.onload = function onLoad() {
         ['TAB', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
         ['CAPSLOCK', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'ENTER'],
         ['SHIFT', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', '', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
+        ['CTRL', 'EN/RU', 'ALT', '', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
       ],
       ru: [
         ['ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'DELETE'],
@@ -23,8 +23,8 @@ window.onload = function onLoad() {
         ['TAB', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\'],
         ['CAPSLOCK', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'ENTER'],
         ['SHIFT', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'SHIFT'],
-        ['CTRL', 'EN/RU', 'ALT', '', 'Alt', 'CTRL', '◄', '▲', '▼', '►'],
-      ],
+        ['CTRL', 'EN/RU', 'ALT', '', 'Alt', 'CTRL', '◄', '▲', '▼', '►']
+      ]
     };
     return matrix[language];
   };
@@ -38,37 +38,55 @@ window.onload = function onLoad() {
   const sumRuLetters = 33;
   const sumEnLetters = 26;
   const fallingLetterSpeed = 500;
-  const changeLetterToFallSpeed = fallingLetterSpeed * 90;
+  const fallingLetterChangingSpeed = fallingLetterSpeed * 90;
 
   const divLetterToFall = document.createElement('div');
   divLetterToFall.setAttribute('class', 'fall-letter');
   divLetterToFall.style.position = 'absolute';
   document.body.append(divLetterToFall);
+  const letterToFallWithStyle = document.querySelector('.fall-letter');
+  letterToFallWithStyle.style.top = '-6vh';
+  letterToFallWithStyle.style.opacity = '1';
+  const timerIdArray = [];
 
-  const fallingLetter = (letter, speed) => {
-    let letterTop = parseInt(letter.style.top);
-    for (let i = 0; i < 90; i++) {
-      setTimeout(() => {
+  const fallingLetter = () => {
+    let letterTop = -6;
+    for (let i = 0; i < 90; i ++) {
+      const timerId = setTimeout(() => {
+        timerIdArray.push(timerId);
         letterTop += 1;
-        letter.style.top = `${letterTop}vh`;
-        letter.style.opacity = (90 - i) / 100;
-      }, speed * i);
+        letterToFallWithStyle.style.top = `${letterTop}vh`;
+        letterToFallWithStyle.style.opacity = (90 - i) / 100;
+      }, fallingLetterSpeed * i);
     }
+    for (let i = 0; i <= timerIdArray.length; i ++) {
+      clearTimeout(timerIdArray[i]);
+    }
+    timerIdArray.length = 0;
   };
 
-  let letterToFallWithStyle;
-
   function generateNewLetterWithInterval() {
-    setInterval((function hello() {
-      // divLetterToFall.innerText = ruLetters[Math.floor(Math.random() * sumRuLetters)];
-      divLetterToFall.innerText = enLetters[Math.floor(Math.random() * sumEnLetters)];
-      letterToFallWithStyle = document.querySelector('.fall-letter');
-      letterToFallWithStyle.style.top = '-6vh';
-      letterToFallWithStyle.style.opacity = '1';
-      fallingLetter(letterToFallWithStyle, fallingLetterSpeed);
-      return hello;
-    }()), changeLetterToFallSpeed);
+    setInterval((function newLetter() {
+      letterToFallWithStyle.innerText = '';
+      letterToFallWithStyle.innerText = enLetters[Math.floor(Math.random() * sumEnLetters)];
+      fallingLetter();
+      return newLetter;
+    }()), fallingLetterChangingSpeed);
   }
+
+  const isLettersMatch = (pressedKeyValue) => {
+    const letterOnScreen = letterToFallWithStyle.innerText;
+    if (letterOnScreen === pressedKeyValue) {
+      playSoundForWin();
+      for (let i = 0; i <= timerIdArray.length; i ++) {
+        clearTimeout(timerIdArray[i]);
+      }
+      timerIdArray.length = 0;
+      generateNewLetterWithInterval();
+    } else {
+      playSoundForLose();
+    }
+  };
 
   generateNewLetterWithInterval();
 
@@ -146,17 +164,6 @@ window.onload = function onLoad() {
     }
   };
 
-  const isLettersMatch = (pressedKeyValue) => {
-    const letterOnScreen = letterToFallWithStyle.innerText;
-    if (letterOnScreen === pressedKeyValue) {
-      letterToFallWithStyle.innerText = '';
-      playSoundForWin();
-      // generateNewLetterWithInterval();
-    } else {
-      playSoundForLose();
-    }
-  };
-
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
 
@@ -216,12 +223,11 @@ window.onload = function onLoad() {
       case ('F12'):
         break;
       default:
-
         pressedKeyValue = document.querySelector(`#${event.code}`).childNodes[0].textContent;
-        isLettersMatch(pressedKeyValue);
     }
-    changeViewTextarea(pressedKeyValue);
+    isLettersMatch(pressedKeyValue);
     keySound(pressedKeyValue);
+    changeViewTextarea(pressedKeyValue);
   });
 
   document.addEventListener('keyup', (event) => {
@@ -247,11 +253,13 @@ window.onload = function onLoad() {
   });
 
   const winLoseSound = document.querySelector('#winLoseSound');
+
   function playSoundForWin() {
     if (winLoseSound.checked) {
       new Audio('src/audio/matched-letter.mp3').play();
     }
   }
+
   function playSoundForLose() {
     if (winLoseSound.checked) {
       new Audio('src/audio/err-matched-letter.mp3').play();
@@ -259,9 +267,11 @@ window.onload = function onLoad() {
   }
 
   const keyPressedSound = document.querySelector('#keyPressedSound');
+
   function keySound(pressedKeyValue) {
     if (keyPressedSound.checked) {
       new Audio(`src/audio/${currentLanguage}/${pressedKeyValue}.mp3`).play();
     }
   }
 };
+
