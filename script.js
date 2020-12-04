@@ -34,55 +34,54 @@ window.onload = function onLoad() {
   }
 
   const ruLetters = ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'];
-  const enLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+  const enLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g',
+    'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
   const sumRuLetters = 33;
   const sumEnLetters = 26;
-  const fallingLetterSpeed = 500;
-  const fallingLetterChangingSpeed = fallingLetterSpeed * 90;
+  let fallingLetterSpeed = 200;
+
 
   const divLetterToFall = document.createElement('div');
   divLetterToFall.setAttribute('class', 'fall-letter');
   divLetterToFall.style.position = 'absolute';
   document.body.append(divLetterToFall);
   const letterToFallWithStyle = document.querySelector('.fall-letter');
-  letterToFallWithStyle.style.top = '-6vh';
+  letterToFallWithStyle.style.top = '-3vh';
   letterToFallWithStyle.style.opacity = '1';
   let timerIdArray = [];
 
   const fallingLetter = () => {
     timerIdArray.forEach(clearTimeout);
     timerIdArray = [];
-    let letterTop = -6;
-    for (let i = 0; i < 90; i ++) {
+    let letterTop = -3;
+    for (let i = 0; i < 93; i++) {
       timerIdArray.push(setTimeout(() => {
         letterTop += 1;
         letterToFallWithStyle.style.top = `${letterTop}vh`;
-        letterToFallWithStyle.style.opacity = (90 - i) / 100;
+        letterToFallWithStyle.style.opacity = (92 - i) / 100;
+        if (letterTop === 90) {
+          alert('GAME OVER!');
+        }
       }, fallingLetterSpeed * i));
     }
-
   };
 
-  function generateNewLetterWithInterval() {
-    setInterval((function newLetter() {
-      letterToFallWithStyle.innerText = '';
-      letterToFallWithStyle.innerText = enLetters[Math.floor(Math.random() * sumEnLetters)];
-      fallingLetter();
-      return newLetter;
-    }()), fallingLetterChangingSpeed);
+  function generateNewLetter() {
+    letterToFallWithStyle.innerText = '';
+    letterToFallWithStyle.innerText = enLetters[Math.floor(Math.random() * sumEnLetters)];
+    fallingLetter();
   }
 
   const isLettersMatch = (pressedKeyValue) => {
     const letterOnScreen = letterToFallWithStyle.innerText;
     if (letterOnScreen === pressedKeyValue) {
       playSoundForWin();
-      generateNewLetterWithInterval();
+      //fallingLetterSpeed -= 50;
+      generateNewLetter();
     } else {
       playSoundForLose();
     }
   };
-
-  generateNewLetterWithInterval();
 
   const arrayKeyCode = getMatrix('code');
   let arrayButtons = [];
@@ -231,10 +230,10 @@ window.onload = function onLoad() {
       .remove('active');
   });
 
-  document.addEventListener('click', () => {
+/*  document.addEventListener('click', () => {
     document.getElementById('textarea')
       .focus();
-  });
+  });*/
 
   const keyboard = document.querySelector('#keyboard');
   const keyboardViewCheckbox = document.querySelector('#keyboardViewCheckbox');
@@ -267,5 +266,9 @@ window.onload = function onLoad() {
       new Audio(`src/audio/${currentLanguage}/${pressedKeyValue}.mp3`).play();
     }
   }
-};
 
+  const startGameBtn = document.querySelector('#startGameBtn');
+  startGameBtn.addEventListener('click', () => {
+    generateNewLetter();
+  });
+};
