@@ -182,6 +182,7 @@ window.onload = function onLoad() {
   }
 
   // ----- game -----
+  // temporary one language
 
   const enLetters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g',
     'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
@@ -311,7 +312,7 @@ window.onload = function onLoad() {
   });
 };
 
-/*  ----- for next game -----
+/*  ----- keep this code here for next level of game -----
 
 const createViewTextarea = () => {
  const textarea = document.createElement('textarea');
